@@ -154,6 +154,10 @@ exports.addReplies = (0, catchAsyncError_1.CatchAsyncError)(async (req, res, nex
                 message: "Post not found",
             });
         }
+        // If replies array doesn't exist, initialize it
+        if (!post?.replies) {
+            post.replies = [];
+        }
         // Add the reply data to the 'replies' array of the post
         post.replies.push(replyData);
         // Save the updated post
@@ -266,6 +270,10 @@ exports.addReply = (0, catchAsyncError_1.CatchAsyncError)(async (req, res, next)
         let data = post.replies.find((reply) => reply._id.toString() === postId);
         if (!data) {
             return next(new ErrorHandler_1.default("Reply not found", 401));
+        }
+        // If replies array doesn't exist, initialize it
+        if (!data?.reply) {
+            data.reply = [];
         }
         data.reply.push(replyData);
         // Save the updated post

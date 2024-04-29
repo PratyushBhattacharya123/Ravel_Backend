@@ -183,6 +183,11 @@ export const addReplies = CatchAsyncError(
         });
       }
 
+      // If replies array doesn't exist, initialize it
+      if (!post?.replies) {
+        post.replies = [];
+      }
+
       // Add the reply data to the 'replies' array of the post
       post.replies.push(replyData);
 
@@ -326,6 +331,11 @@ export const addReply = CatchAsyncError(
 
       if (!data) {
         return next(new ErrorHandler("Reply not found", 401));
+      }
+
+      // If replies array doesn't exist, initialize it
+      if (!data?.reply) {
+        data.reply = [];
       }
 
       data.reply.push(replyData);
