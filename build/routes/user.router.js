@@ -1,0 +1,20 @@
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const express_1 = __importDefault(require("express"));
+const user_controller_1 = require("../controllers/user.controller");
+const auth_1 = require("../middleware/auth");
+const userRouter = express_1.default.Router();
+userRouter.post("/registration", user_controller_1.registrationUser);
+userRouter.post("/login", user_controller_1.loginUser);
+userRouter.get("/logout", auth_1.isAuthenticated, user_controller_1.logoutUser);
+userRouter.get("/me", user_controller_1.userDetails);
+userRouter.get("/users", user_controller_1.getAllUsers);
+userRouter.put("/add-user", user_controller_1.followUnfollowUser);
+userRouter.put("/update-avatar", user_controller_1.updateUserAvatar);
+userRouter.put("/update-profile", user_controller_1.updateUserInfo);
+userRouter.get("/get-notifications/:userId", user_controller_1.getNotification);
+userRouter.get("/get-user/:id", user_controller_1.getUser);
+exports.default = userRouter;
