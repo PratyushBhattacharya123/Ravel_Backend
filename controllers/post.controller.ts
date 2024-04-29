@@ -461,11 +461,10 @@ export const deletePost = CatchAsyncError(
         return next(new ErrorHandler("Post is not found with this id", 404));
       }
 
-      if (post.image) {
-        // @ts-ignore
-        const imageId = post?.image?.public_id;
-        await cloudinary.v2.uploader.destroy(imageId);
-      }
+      // if (post.image) {
+      //   const imageId = post?.image?.public_id;
+      //   await cloudinary.v2.uploader.destroy(imageId);
+      // }
 
       await PostModal.deleteOne({ _id: req.params.id });
       res.status(201).json({
