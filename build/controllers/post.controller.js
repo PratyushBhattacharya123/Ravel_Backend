@@ -369,11 +369,10 @@ exports.deletePost = (0, catchAsyncError_1.CatchAsyncError)(async (req, res, nex
         if (!post) {
             return next(new ErrorHandler_1.default("Post is not found with this id", 404));
         }
-        if (post.image) {
-            // @ts-ignore
-            const imageId = post?.image?.public_id;
-            await cloudinary_1.default.v2.uploader.destroy(imageId);
-        }
+        // if (post.image) {
+        //   const imageId = post?.image?.public_id;
+        //   await cloudinary.v2.uploader.destroy(imageId);
+        // }
         await post_model_1.default.deleteOne({ _id: req.params.id });
         res.status(201).json({
             success: true,
